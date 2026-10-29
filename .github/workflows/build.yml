@@ -21,7 +21,8 @@ jobs:
           sudo apt update
           sudo apt install -y git zip unzip openjdk-17-jdk \
             autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
-            libncursesw5-dev libtinfo5 cmake libffi-dev python3-dev
+            libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev \
+            python3-dev lib32z1 lib32stdc++6
 
       - name: Install Buildozer 
         run: |
