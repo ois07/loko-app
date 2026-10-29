@@ -14,6 +14,7 @@ android.ndk = 25b
 android.archs = arm64-v8a
 android.accept_sdk_license = True
 android.build_tools = 33.0.2
+android.entrypoint = org.kivy.android.PythonActivity
 
 [buildozer]
 log_level = 2
