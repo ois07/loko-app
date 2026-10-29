@@ -30,16 +30,21 @@ jobs:
           pip install cython
           pip install buildozer
 
-      - name: Copy files to workdir
+      - name: Prepare clean build directory
         run: |
-          cp app/main.py .
-          cp app/buildozer.spec .
+          mkdir -p /tmp/build_loco
+          cp app/main.py /tmp/build_loco/
+          cp app/buildozer.spec /tmp/build_loco/
+          cd /tmp/build_loco
+          ls -la
 
       - name: Build APK
-        run: buildozer android debug
+        run: |
+          cd /tmp/build_loco
+          buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: locomotive-apk
-          path: bin/*.apk
+          path: /tmp/build_loco/bin/*.apk
