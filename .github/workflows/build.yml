@@ -30,21 +30,17 @@ jobs:
           pip install cython
           pip install buildozer
 
-      - name: Prepare clean build directory
+      # Копируем файлы из app в корень рабочей папки, чтобы обойти баг
+      - name: Prepare build directory
         run: |
-          mkdir -p /tmp/build_loco
-          cp app/main.py /tmp/build_loco/
-          cp app/buildozer.spec /tmp/build_loco/
-          cd /tmp/build_loco
-          ls -la
+          cp app/main.py .
+          cp app/buildozer.spec .
 
       - name: Build APK
-        run: |
-          cd /tmp/build_loco
-          buildozer android debug
+        run: buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: locomotive-apk
-          path: /tmp/build_loco/bin/*.apk
+          path: bin/*.apk
